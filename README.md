@@ -64,18 +64,6 @@ requirements-tools.txt
 
 Generated data and the DuckDB file are ignored by git (see `.gitignore`).
 
-## Publish to GitHub
-
-1. Create a **new empty** repository on GitHub named `openmeteo-dbt-pipeline` (no README / no `.gitignore` from the wizard, or you will need to pull first).
-2. From this folder:
-
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/openmeteo-dbt-pipeline.git
-git push -u origin main
-```
-
-Use SSH if you prefer: `git@github.com:YOUR_USERNAME/openmeteo-dbt-pipeline.git`
-
 ## License
 
 Educational / portfolio use. Add a `LICENSE` file if you need a standard OSS license.
