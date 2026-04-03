@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-tools.txt
+
+      - name: Install tools
+        run: pip install -r requirements-tools.txt
+
+      - name: Ensure DuckDB dir
+        run: mkdir -p data/duckdb
+
+      - name: Ingest (fixed UTC day for reproducible CI)
+        run: python pipelines/ingest_weather_daily.py --date 2024-06-15
+
+      - name: dbt build
+        run: python -m dbt.cli.main build --project-dir dbt_project --profiles-dir dbt_project
