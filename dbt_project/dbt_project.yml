@@ -1,0 +1,22 @@
+name: openmeteo_dbt_pipeline
+version: "1.0.0"
+config-version: 2
+
+profile: openmeteo_dbt_pipeline
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+vars:
+  raw_weather_glob: "data/raw/weather_city_daily/**/*.parquet"
+
+models:
+  openmeteo_dbt_pipeline:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

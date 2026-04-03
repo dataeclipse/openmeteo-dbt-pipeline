@@ -1,0 +1,15 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+data/bronze/**/*.parquet
+data/raw/**/*.parquet
+data/duckdb/*.duckdb
+data/duckdb/*.duckdb.wal
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/.user.yml
+dbt_project/logs/
+logs/
+.DS_Store
